@@ -89,6 +89,15 @@ android {
             keyPassword 'android'
         }
     }
+
+    signingConfigs {
+        release {
+            storeFile file('your_key_name.keystore')
+            storePassword '123456'
+            keyAlias 'your_key_alias'
+            keyPassword '123456'
+        }
+    }
     buildTypes {
         debug {
             signingConfig signingConfigs.debug
@@ -99,8 +108,15 @@ android {
             signingConfig signingConfigs.debug
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+            signingConfig signingConfigs.release
         }
     }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_11
+    }
+    
 }
 
 dependencies {

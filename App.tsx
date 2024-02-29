@@ -1,118 +1,67 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
-
-import React from 'react';
-import type {PropsWithChildren} from 'react';
+import React, {useMemo, useState} from 'react';
 import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
+  StreamVideo,
+  StreamVideoClient,
+} from '@stream-io/video-react-native-sdk';
+import { SafeAreaView, StyleSheet } from 'react-native';
+import { HomeScreen } from './src/HomeScreen';
+import { CallScreen } from './src/CallScreen';
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+const apiKey = 'mmhfdzb5evj2'; 
+const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiRGFzaF9SZW5kYXIiLCJpc3MiOiJodHRwczovL3Byb250by5nZXRzdHJlYW0uaW8iLCJzdWIiOiJ1c2VyL0Rhc2hfUmVuZGFyIiwiaWF0IjoxNzA5MTA2OTI1LCJleHAiOjE3MDk3MTE3MzB9.YSfkc5SHTNZ1cz_ZmCabuNj7-vZBUYAm-9Zk1s7xEvc'; 
+const userId = 'Dash_Rendar'; 
+const callId = 'sh8j6K0QHAOy'; 
 
-type SectionProps = PropsWithChildren<{
-  title: string;
-}>;
+const user = {
+  id: userId,
+  name: 'Arun Kumar',
+  image: `https://getstream.io/random_png/?id=${userId}&name=John+Malkovich`,
+};
+const client = new StreamVideoClient({ apiKey, user, token });
 
-function Section({children, title}: SectionProps): JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-  return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
-    </View>
+export default function App() {
+  const [activeScreen, setActiveScreen] = useState('home');
+  const goToCallScreen = () => setActiveScreen('call-screen');
+  const goToHomeScreen = () => setActiveScreen('home');
+
+  const theme = useMemo(
+    () => ({
+      callControlsButton: {
+        container: {
+          borderRadius: 10,
+        },
+      },
+      hangupCallButton: {
+        container: {
+          backgroundColor: 'red',
+        },
+      },
+      toggleAudioPublishingButton: {
+        container: {
+          backgroundColor: 'green',
+        },
+      },
+    }),
+    [],
   );
-}
-
-function App(): JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
 
   return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={backgroundStyle.backgroundColor}
-      />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <Header />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.tsx</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
-        </View>
-      </ScrollView>
-    </SafeAreaView>
+    <StreamVideo client={client} style={theme}>
+      <SafeAreaView style={styles.container}>
+        {activeScreen === 'call-screen' ? (
+          <CallScreen goToHomeScreen={goToHomeScreen} callId={callId} />
+        ) : (
+          <HomeScreen goToCallScreen={goToCallScreen} />
+        )}
+      </SafeAreaView>
+    </StreamVideo>
   );
 }
 
 const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    textAlign: 'center',
   },
 });
-
-export default App;

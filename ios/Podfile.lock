@@ -73,6 +73,7 @@ PODS:
   - hermes-engine (0.72.1):
     - hermes-engine/Pre-built (= 0.72.1)
   - hermes-engine/Pre-built (0.72.1)
+  - JitsiWebRTC (118.0.0)
   - libevent (2.1.12)
   - OpenSSL-Universal (1.1.1100)
   - RCT-Folly (2021.07.22.00):
@@ -374,6 +375,8 @@ PODS:
   - React-jsinspector (0.72.1)
   - React-logger (0.72.1):
     - glog
+  - react-native-netinfo (9.3.9):
+    - React-Core
   - React-NativeModulesApple (0.72.1):
     - hermes-engine
     - React-callinvoker
@@ -484,7 +487,22 @@ PODS:
     - React-jsi (= 0.72.1)
     - React-logger (= 0.72.1)
     - React-perflogger (= 0.72.1)
+  - ReactNativeIncallManager (4.1.0):
+    - React-Core
+  - RNNotifee (7.7.1):
+    - React-Core
+    - RNNotifee/NotifeeCore (= 7.7.1)
+  - RNNotifee/NotifeeCore (7.7.1):
+    - React-Core
+  - RNSVG (15.0.0):
+    - React-Core
   - SocketRocket (0.6.1)
+  - stream-react-native-webrtc (118.0.1):
+    - JitsiWebRTC (~> 118.0.0)
+    - React-Core
+  - stream-video-react-native (0.5.0):
+    - React-Core
+    - stream-react-native-webrtc
   - Yoga (1.14.0)
   - YogaKit (1.18.1):
     - Yoga (~> 1.14)
@@ -535,6 +553,7 @@ DEPENDENCIES:
   - React-jsiexecutor (from `../node_modules/react-native/ReactCommon/jsiexecutor`)
   - React-jsinspector (from `../node_modules/react-native/ReactCommon/jsinspector`)
   - React-logger (from `../node_modules/react-native/ReactCommon/logger`)
+  - "react-native-netinfo (from `../node_modules/@react-native-community/netinfo`)"
   - React-NativeModulesApple (from `../node_modules/react-native/ReactCommon/react/nativemodule/core/platform/ios`)
   - React-perflogger (from `../node_modules/react-native/ReactCommon/reactperflogger`)
   - React-RCTActionSheet (from `../node_modules/react-native/Libraries/ActionSheetIOS`)
@@ -552,6 +571,11 @@ DEPENDENCIES:
   - React-runtimescheduler (from `../node_modules/react-native/ReactCommon/react/renderer/runtimescheduler`)
   - React-utils (from `../node_modules/react-native/ReactCommon/react/utils`)
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
+  - ReactNativeIncallManager (from `../node_modules/react-native-incall-manager`)
+  - "RNNotifee (from `../node_modules/@notifee/react-native`)"
+  - RNSVG (from `../node_modules/react-native-svg`)
+  - "stream-react-native-webrtc (from `../node_modules/@stream-io/react-native-webrtc`)"
+  - "stream-video-react-native (from `../node_modules/@stream-io/video-react-native-sdk`)"
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
 SPEC REPOS:
@@ -566,6 +590,7 @@ SPEC REPOS:
     - Flipper-PeerTalk
     - FlipperKit
     - fmt
+    - JitsiWebRTC
     - libevent
     - OpenSSL-Universal
     - SocketRocket
@@ -615,6 +640,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/jsinspector"
   React-logger:
     :path: "../node_modules/react-native/ReactCommon/logger"
+  react-native-netinfo:
+    :path: "../node_modules/@react-native-community/netinfo"
   React-NativeModulesApple:
     :path: "../node_modules/react-native/ReactCommon/react/nativemodule/core/platform/ios"
   React-perflogger:
@@ -649,6 +676,16 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/react/utils"
   ReactCommon:
     :path: "../node_modules/react-native/ReactCommon"
+  ReactNativeIncallManager:
+    :path: "../node_modules/react-native-incall-manager"
+  RNNotifee:
+    :path: "../node_modules/@notifee/react-native"
+  RNSVG:
+    :path: "../node_modules/react-native-svg"
+  stream-react-native-webrtc:
+    :path: "../node_modules/@stream-io/react-native-webrtc"
+  stream-video-react-native:
+    :path: "../node_modules/@stream-io/video-react-native-sdk"
   Yoga:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
@@ -669,6 +706,7 @@ SPEC CHECKSUMS:
   fmt: ff9d55029c625d3757ed641535fd4a75fedc7ce9
   glog: 04b94705f318337d7ead9e6d17c019bd9b1f6b1b
   hermes-engine: 9df83855a0fd15ef8eb61694652bae636b0c466e
+  JitsiWebRTC: 3a41671ef65a51d7204323814b055a2690b921c7
   libevent: 4049cae6c81cdb3654a443be001fb9bdceff7913
   OpenSSL-Universal: ebc357f1e6bc71fa463ccb2fe676756aff50e88c
   RCT-Folly: 424b8c9a7a0b9ab2886ffe9c3b041ef628fd4fb1
@@ -686,6 +724,7 @@ SPEC CHECKSUMS:
   React-jsiexecutor: 184eae1ecdedc7a083194bd9ff809c93f08fd34c
   React-jsinspector: d0b5bfd1085599265f4212034321e829bdf83cc0
   React-logger: b8103c9b04e707b50cdd2b1aeb382483900cbb37
+  react-native-netinfo: 22c082970cbd99071a4e5aa7a612ac20d66b08f0
   React-NativeModulesApple: 4f31a812364443cee6ef768d256c594ad3b20f53
   React-perflogger: 3d501f34c8d4b10cb75f348e43591765788525ad
   React-RCTActionSheet: f5335572c979198c0c3daff67b07bd1ad8370c1d
@@ -703,7 +742,12 @@ SPEC CHECKSUMS:
   React-runtimescheduler: 67707a955b9ecc628cc38bdc721fbc498910f0fd
   React-utils: 0a70ea97d4e2749f336b450c082905be1d389435
   ReactCommon: e593d19c9e271a6da4d0bd7f13b28cfeae5d164b
+  ReactNativeIncallManager: 2385505fa5dfdbbc78925e3b8d23b30ce0cde40e
+  RNNotifee: 05692d7bb42b6c718a3906aeb8431c48ff2e8097
+  RNSVG: 3f65a03e0c61a8495dee92bf82545ed9041cbf3b
   SocketRocket: f32cd54efbe0f095c4d7594881e52619cfe80b17
+  stream-react-native-webrtc: 31fe9ee69d5b4fc191380a78efa292377494b7ac
+  stream-video-react-native: f4df891bc23794324213aba36b3b507137eaf792
   Yoga: 65286bb6a07edce5e4fe8c90774da977ae8fc009
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
